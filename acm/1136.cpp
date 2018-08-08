@@ -21,26 +21,15 @@ using namespace std;
 
 int main()
 {
-    int t,n,m,test=1;
+    int t,test=1;
     scanf("%d",&t);
     while(t--){
-        scanf("%d%d",&n,&m);
-        int ans=(int)ceil((n*m)/2.0);
-        if(n==1 || m==1) ans=m*n;
-        if(n==2 || m==2){
-            if(n==2) n=m;
-            if(n==2) ans=4;
-            else if(n%4==0) ans=n;
-            else {
-                ans=n/4;
-                ans*=4;
-                n=n%4;
-                if(n==1) ans+=2;
-                else if(n==2) ans+=4;
-                else if(n==3) ans+=4;
-            }
-        }
+        int x,y;
+        scanf("%d%d",&x,&y);
+        x--;
+        int ans=(y/3)*2 + (y%3==2?1:0) - ( (x/3)*2 + (x%3==2?1:0) );
         printf("Case %d: %d\n",test++,ans);
     }
     return 0;
 }
+
