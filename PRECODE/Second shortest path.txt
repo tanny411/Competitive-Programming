@@ -1,0 +1,157 @@
+
+WAY ONE:-
+
+First, solve the single-destination shortest path problem for target vertex t. The interview question specifies an undirected graph, so single-destination t is equivalent to single-source t. If it were a directed graph, reverse all edges and then apply Dijkstra's algorithm with target vertex t as the "source".
+
+Now walk along the shortest path from the source vertex s to the target vertex t. At each vertex v along this shortest path, consider taking a single step to the side by exploring all vertices x adjacent to v where x is not the next vertex on the shortest path. Calculate distance(s, v) + distance(v, x) + distance(x, t). Record the minimum value found. It will be the second shortest path.
+
+distance(s, v) can be summed incrementally as you walk away from s.
+distance(v, x) is the length of a single edge.
+distance(x, t) was calculated and stored in the first step for all vertices x.
+
+The rationale of this algorithm is to make only one "misstep" along the path from s to t. After making the misstep, follow the new optimum path to t. Choose the misstep that minimizes the cost of the error. The misstep could even be a single step backwards along the shortest path.
+
+WAY TWO:-
+
+http://lbv-pc.blogspot.com/2012/06/not-best.html
+
+// Second best (shortest) paths from single source
+function Dijkstra2(Graph, source):
+    for each vertex v in Graph:
+        // Two dimensions to represent the two best distances
+        dist[1][v] := infinity ;
+        dist[2][v] := infinity ;
+        vis[1][v]  := false ;
+        vis[2][v]  := false ;
+    end for ;
+    dist[1][source] := 0 ;
+ 
+    Q := a priority queue of tuples (t,d,v) ; // line 12
+    push (1, 0, source) to Q ;
+ 
+    while Q is not empty:
+        t := first element of the tuple from the front of Q ;
+        u := third element of the tuple from the front of Q ;
+        pop front element from Q ;
+ 
+        if vis[t][u]:
+            continue ;
+        end if ;
+        vis[t][u] := true ;
+ 
+        for each neighbor v of u:
+            alt := dist[t][u] + dist_between(u, v) ;
+            if alt < dist[1][v]:
+                dist[2][v] := dist[1][v] ;                //line 28
+                push (2, dist[2][v], v) to Q ;            //line 29
+ 
+                dist[1][v] := alt ;
+                push (1, dist[1][v], v) to Q ;
+            else if alt > dist[1][v] and alt < dist[2][v]: //line 33
+                dist[2][v] := alt ;
+                push (2, dist[2][v], v) to Q ;
+            end if ;
+        end for ;
+    end while ;
+    return dist[2][] ;
+end Dijkstra2.
+
+As you can see, the idea is pretty simple, but the changes require attention to important details.
+
+First of all, notice that the dist and vis arrays are two-dimensional arrays now, and the first index could be 1 or 2, representing the best or second-best path respectively.
+
+Also, at line 12, the tuples that we store in Q have three elements now, where the first one is an integer to represent the type of tuple (1 or 2, as described for the dist and vis arrays).
+
+Finally, notice how the decisions on what to push to the queue are affected. If a new best distance to a vertex is found, then the previous one is bumped as the new second-best distance (lines 28-29).
+
+Also, if the alternative distance is strictly larger than the best path, but is better than the second-best, then it needs to be used (line 33).
+
+WAY THREE:-
+
+#include<bits/stdc++.h>
+
+#define pb push_back
+#define Pb pop_back
+
+#define PI acos(-1.00)
+#define pii pair<int,int>
+#define ppi pair<pii,int>
+#define INTMAX 1<<30
+#define MOD 1000000007
+
+#define LL long long
+#define LLU unsigned long long
+
+#define fs first
+#define sc second
+
+///ios_base::sync_with_stdio(false);
+
+using namespace std;
+
+vector<pii>gr[5002];
+int d1[5002],d2[5002];
+void dijkstra(int s)
+{
+    d1[s]=0;
+    priority_queue<pii,vector<pii>,greater<pii> >q;
+    q.push(pii(0,s));
+    while(!q.empty())
+    {
+        int u=q.top().sc;
+        q.pop();
+        for(int i=0;i<gr[u].size();i++)
+        {
+            int v=gr[u][i].fs;
+            int d=gr[u][i].sc;
+            if(d1[u]+d<d1[v])
+            {
+                int temp=d1[v];
+                d1[v]=d1[u]+d;
+                d2[v]=min(d2[v],min(temp,min(d2[u]+d,d1[u]+3*d)));
+                q.push(pii(d1[v]+d2[v],v));
+            }
+            else if(d1[u]+d>d1[v] && d1[u]+d<d2[v]) d2[v]=d1[u]+d;
+            else d2[v]=min(d2[v],min(d1[u]+3*d,d2[u]+d));
+        }
+    }
+}
+int main()
+{
+    int t,cas=1;
+    cin>>t;
+    while(t--)
+    {
+        int n,m;
+        cin>>n>>m;
+        for(int i=0;i<=n;i++)
+        {
+            gr[i].clear();
+            d1[i]=d2[i]=30000000; ///not giving 1<<30 cuz we'll be adding stuffs to it
+        }
+        while(m--)
+        {
+            int x,y,w;
+            cin>>x>>y>>w;
+            gr[x].pb(pii(y,w));
+            gr[y].pb(pii(x,w));
+        }
+        dijkstra(1);
+        cout<<"Case "<<cas++<<": "<<min(d2[n],d2[1]+d1[n])<<endl;
+        ///d2[1]+d1[n] case is checked again because when working with 
+        ///node 1, its d2[1] is not yet found and remains inf
+    }
+    return 0;
+}
+/* Special Case
+Input:
+    1
+    4 5
+    1 2 3
+    2 3 7
+    3 4 4
+    1 2 4
+    4 1 4
+Output:
+    Case 1: 10
+*/
