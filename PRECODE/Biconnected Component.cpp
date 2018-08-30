@@ -42,6 +42,8 @@ void dfs_bcc(int p,int u)
             low[u]=min(low[u],low[v]);
             if((p==-1 && child>1) || disc[u]<=low[v] )
             {
+                ///u is a articulation point
+                ///so all the edges we visited(tree/backedges) from here are in a BCC
                 cout<<"BCC : \n";
                 while(1)
                 {
