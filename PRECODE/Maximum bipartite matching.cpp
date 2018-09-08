@@ -1,5 +1,5 @@
 // A C++ program to find maximal Bipartite matching.
-///has to be unidirectional graph
+///has to be directed graph
 #include <iostream>
 #include <string.h>
 using namespace std;

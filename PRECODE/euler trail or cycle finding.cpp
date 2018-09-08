@@ -75,32 +75,15 @@ int main()
             dfs(st);
             if(1){///fix this part
                 cout<<"Case "<<test<<": Yes\n";
-                int f=0;
+                int f=0,last=0;
                 if((cnt1==1 && cnt2==1 && hobena==0))
                 {
-                    int i;
-                    for(i=0;i<path.size()-1;i++){
-                        if(path[i]==st && path[i+1]==en) break;
-                    }
-                    int brk=i+1;
-                    for(i=brk-1;i>=0;i--){
-                        if(f) cout<<" ";
-                        f=1;
-                        cout<<path[i];
-                    }
-                    for(i=path.size()-1;i>brk;i--){
-                        if(f) cout<<" ";
-                        f=1;
-                        cout<<path[i];
-                    }
+                    last=1;
                 }
-                else
-                {
-                    for(int i=path.size()-1;i>=0;i--){
-                        if(f) cout<<" ";
-                        f=1;
-                        cout<<path[i];
-                    }
+                for(int i=path.size()-1;i>=last;i--){
+                    if(f) cout<<" ";
+                    f=1;
+                    cout<<path[i];
                 }
                 cout<<"\n";
             }

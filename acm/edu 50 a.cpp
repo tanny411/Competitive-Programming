@@ -20,18 +20,9 @@
 using namespace std;
 int main()
 {
-    int test=1;
-    int n;
-    while(cin>>n && n)
-    {
-        int x;
-        int ans=0;
-        while(n--){
-            cin>>x;
-            if(x>0) ans++;
-            else ans--;
-        }
-        cout<<"Case "<<test++<<": "<<ans<<endl;
-    }
+    long double a,b;
+    cin>>a>>b;
+    LL ans=ceil(b/a);
+    cout<<ans<<endl;
     return 0;
 }
