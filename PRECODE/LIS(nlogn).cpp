@@ -56,7 +56,7 @@ int lis(vector<int>v)
     for(int i=0;i<v.size();i++)
     {
         int x=v[i];
-        ///strictly increasing er khetre LOWER naile UPPER bound
+        ///strictly increasing er khetre LOWER, naile UPPER bound
         int in=upper_bound(temp.begin(),temp.end(),x)-temp.begin();
         if(in==temp.size()) temp.pb(x);
         else temp[in]=min(x,temp[in]);
