@@ -21,6 +21,20 @@ using namespace std;
 
 int main()
 {
-
+    int t,test=1;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int x,cnt=0;
+        int prev=2;
+        for(int i=0;i<n;i++) {
+            int x;
+            cin>>x;
+            cnt+=( (x-prev)/5 + ((x-prev)%5!=0) );
+            prev=x;
+        }
+        cout<<"Case "<<test++<<": "<<cnt<<endl;
+    }
     return 0;
 }
