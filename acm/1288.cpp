@@ -1,3 +1,4 @@
+#include<bits/stdc++.h>
 #include <stdio.h>
 #include <algorithm>
 using namespace std;
@@ -43,7 +44,7 @@ int main() {
 			for(int j = 0; j < col; j++)
 				swap(f[r][j], f[k][j]);
 
-			if(f[r][c] == 0) {arb++;continue;}
+			if(f[r][c] == 0) {cout<<c<<endl; arb++;continue;}
 
 			for(int j = 0; j < row; j++) {
 				if(r == j)	continue;
@@ -54,6 +55,7 @@ int main() {
 			}
 			r++;
 		}
+        cout<<arb<<endl;
 		printf("%lld\n", (1LL<<arb) - 1);
 	}
 	return 0;
