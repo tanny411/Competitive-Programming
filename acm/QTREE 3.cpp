@@ -102,7 +102,7 @@ int query(int x)
         if(chainNo[x]==chainNo[1])
         {
             int y=query_seg(1,1,ptr,posBase[1],posBase[x]);
-            if(y!=1<<30) ans=y;;
+            if(y!=1<<30) ans=y;
             return ans;
         }
         int y=query_seg(1,1,ptr,posBase[ chainHead[ chainNo[x] ] ],posBase[x]);

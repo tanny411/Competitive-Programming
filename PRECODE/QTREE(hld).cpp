@@ -16,7 +16,7 @@
 #define ln 14
 using namespace std;
 
-vector<pair<pii,int> >gr[node]; ///v,w,indexxOfEdge
+vector<pair<pii,int> >gr[node]; ///v,w,indexOfEdge
 int table[node][ln],level[node],siz[node],indexx[node];
 int chainNo[node],chainHead[node],chain,posBase[node],ptr,base[node];
 int tree[4*node];
