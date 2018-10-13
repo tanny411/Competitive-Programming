@@ -16,7 +16,7 @@
 ///ios_base::sync_with_stdio(false)
 
 using namespace std;
-
+///O(n*logn)
 struct ClosestPairOfPoint
 {
     ///points taken as double

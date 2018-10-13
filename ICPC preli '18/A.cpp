@@ -21,12 +21,6 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     int t,test=1;
-    multiset<int>m;
-    m.insert(2);
-    m.insert(-90);
-    m.insert(60);
-    m.insert(7);
-    cout<<*m.rbegin();
+    cout<<"Welcome to ACM ICPC Dhaka Regional Online Preliminary Contest, 2018"<<endl;
     return 0;
 }
-

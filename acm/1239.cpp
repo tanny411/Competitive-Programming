@@ -1,11 +1,12 @@
 #include<bits/stdc++.h>
 #define pb push_back
-#define pii pair<int,int>
+#define pii pair<ll,ll>
+#define ll long long
 #define fs first
 #define sc second
 using namespace std;
 
-int ccw(pii a,pii b,pii c)
+ll ccw(pii a,pii b,pii c)
 {
     ///ab X ac
     return (b.fs-a.fs)*(c.sc-a.sc)-(b.sc-a.sc)*(c.fs-a.fs);
@@ -55,23 +56,49 @@ vector<pii> monotone (vector<pii>p)
     hullsize--;
     return hull;
 }
-
+double dist(pii a,pii b)
+{
+    double x=1.0*a.fs-1.0*b.fs;
+    double y=1.0*a.sc-1.0*b.sc;
+    return sqrt(x*x+y*y);
+}
 int main()
 {
-    int n;
-    cin>>n;
-    vector<pii>p(n);
-    for(int i=0;i<n;i++)
+    ios_base::sync_with_stdio(false);
+    int t,test=1;
+    cin>>t;
+    while(t--)
     {
-        cin>>p[i].fs>>p[i].sc;
+        int n,d;
+        cin>>n>>d;
+        vector<pii>p(n);
+        for(int i=0;i<n;i++)
+        {
+            cin>>p[i].fs>>p[i].sc;
+        }
+        double ans=2.0*acos(-1.0)*(1.0*d);;
+        if(n<3){
+            if(n==2) ans+=2.0*dist(p[0],p[1]);
+            cout<<"Case "<<test++<<": "<<fixed<<setprecision(10)<<ans<<endl;
+            continue;
+        }
+        vector<pii>hull;
+        hull=monotone(p);
+        int sz=hull.size();
+        for(int i=0;i<sz;i++)
+        {
+            if(i){
+                ans+=dist(hull[i],hull[i-1]);
+            }
+            else{
+                ans+=dist(hull[0],hull[sz-1]);
+            }
+        }
+        cout<<"Case "<<test++<<": "<<fixed<<setprecision(10)<<ans<<endl;
     }
-    vector<pii>hull;
-    hull=monotone(p);
-    cout<<"HUll :"<<endl;
-    for(int i=0;i<hull.size();i++)
-    {
-        cout<<hull[i].fs<<" "<<hull[i].sc<<endl;
-    }
+
+
     return 0;
 }
+
 

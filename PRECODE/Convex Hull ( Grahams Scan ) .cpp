@@ -71,7 +71,7 @@ void MakeHull()
     Hull.pb(p[0]);
     Hull.pb(p[1]);
     Hull.pb(p[2]);
-    int hullsize=2;
+    int hullsize=2;//last index
     for(int i=3; i<p.size(); i++)
     {
         while(cw_ccw(Hull[hullsize-1],Hull[hullsize],p[i])<=0)
@@ -95,7 +95,7 @@ void prntHull()
 
 int main()
 {
-
+    ///input p vector
     return 0;
 }
 

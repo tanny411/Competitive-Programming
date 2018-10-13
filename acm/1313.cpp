@@ -1,3 +1,4 @@
+
 #include<bits/stdc++.h>
 #define pb push_back
 #define pii pair<int,int>
@@ -58,19 +59,23 @@ vector<pii> monotone (vector<pii>p)
 
 int main()
 {
-    int n;
-    cin>>n;
-    vector<pii>p(n);
-    for(int i=0;i<n;i++)
+    int t,test=1;
+    cin>>t;
+    while(t--)
     {
-        cin>>p[i].fs>>p[i].sc;
-    }
-    vector<pii>hull;
-    hull=monotone(p);
-    cout<<"HUll :"<<endl;
-    for(int i=0;i<hull.size();i++)
-    {
-        cout<<hull[i].fs<<" "<<hull[i].sc<<endl;
+        int n,m,G,P;
+        cin>>n>>m>>G>>P;
+        vector<pii>p(n),mines(m);
+        for(int i=0;i<n;i++)
+        {
+            cin>>p[i].fs>>p[i].sc;
+        }
+        for(int i=0;i<m;i++)
+        {
+            cin>>mines[i].fs>>mines[i].sc;
+        }
+        vector<pii>hull;
+        hull=monotone(p);
     }
     return 0;
 }
