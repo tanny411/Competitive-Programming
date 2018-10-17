@@ -40,13 +40,24 @@ struct Matrix
             {
                 for(int j=0; j<col; j++)
                 {
-                    res[i][k]+=mat[i][j]*a.mat[j][k];
+                    res[i][k]=(res[i][k]+mat[i][j]*a.mat[j][k])%10;;
                 }
             }
         }
         return Matrix(res);
     }
-
+    Matrix operator+(const Matrix &a) const
+    {
+        Matrix ret(row,col);
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                ret.mat[i][j]=(mat[i][j]+a.mat[i][j])%10;
+            }
+        }
+        return ret;
+    }
     Matrix identity(int n)
     {
         Matrix a(n,n);
@@ -91,36 +102,32 @@ struct Matrix
         }
     }
 };
-
+Matrix bigsum(Matrix a,int n)
+{
+    if(n==1) return a.identity(a.row);
+    if(n&1) return a.identity(a.row) + a*bigsum(a,n-1);
+    Matrix ret=bigsum(a*a,n/2);
+    return ret+a*ret;
+}
 int main()
 {
-    /*
-    ///MULTIPLYING TWO MATRICES
-    int n,m,k;
-    cin>>n>>m>>k;
-    Matrix a(n,m),b(m,k);
-    a.WholeInput();
-    b.WholeInput();
-    Matrix res=a*b;
-    res.printMat();
-    ///END MULTIPLY
-    */
-
-    ///FINDING THE N-TH FIBONACCCI
-    Matrix M(2,2);
-    M.takeIn(0,0,1);
-    M.takeIn(0,1,1);
-    M.takeIn(1,0,1);
-    M.takeIn(1,1,0);
-    Matrix F(2,1);
-    F.takeIn(0,0,1);
-    F.takeIn(1,0,1);
-    int nth;
-    while(cin>>nth)
+    ios_base::sync_with_stdio(false);
+    int t,test=1;
+    cin>>t;
+    while(t--)
     {
-        Matrix r(M.expo(nth-1)*F);
-        cout<<r.mat[0][0]<<endl;
+        int n,k;
+        cin>>n>>k;
+        Matrix a(n,n);
+        for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin>>a.mat[i][j];
+        a=a*bigsum(a,k);///power 0...k-1
+        cout<<"Case "<<test++<<":\n";
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++) cout<<a.mat[i][j];
+            cout<<endl;
+        }
     }
     return 0;
 }
+
 

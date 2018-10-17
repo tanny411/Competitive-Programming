@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 #define pb push_back
-
+#define md 10007
+//http://lbv-pc.blogspot.com/2012/09/tiles.html
 using namespace std;
-///Did not Deal with doing mod; for that put mod in the multiply function;all replace all int with long long
 struct Matrix
 {
     vector<vector<int> >mat;
@@ -40,7 +40,7 @@ struct Matrix
             {
                 for(int j=0; j<col; j++)
                 {
-                    res[i][k]+=mat[i][j]*a.mat[j][k];
+                    res[i][k]=(res[i][k]+mat[i][j]*a.mat[j][k])%md;
                 }
             }
         }
@@ -94,32 +94,21 @@ struct Matrix
 
 int main()
 {
-    /*
-    ///MULTIPLYING TWO MATRICES
-    int n,m,k;
-    cin>>n>>m>>k;
-    Matrix a(n,m),b(m,k);
-    a.WholeInput();
-    b.WholeInput();
-    Matrix res=a*b;
-    res.printMat();
-    ///END MULTIPLY
-    */
+    Matrix M(4,4);
+    M.mat[0][0]=M.mat[0][1]=M.mat[0][2]=M.mat[0][3]=1;
+    M.mat[1][0]=M.mat[2][1]=M.mat[2][3]=M.mat[3][1]=M.mat[3][2]=1;
 
-    ///FINDING THE N-TH FIBONACCCI
-    Matrix M(2,2);
-    M.takeIn(0,0,1);
-    M.takeIn(0,1,1);
-    M.takeIn(1,0,1);
-    M.takeIn(1,1,0);
-    Matrix F(2,1);
-    F.takeIn(0,0,1);
-    F.takeIn(1,0,1);
-    int nth;
-    while(cin>>nth)
+    Matrix F(4,1);
+    F.mat[0][0]=1;
+    F.mat[1][0]=1;
+
+    int t,test=1;
+    cin>>t;
+    while(t--)
     {
-        Matrix r(M.expo(nth-1)*F);
-        cout<<r.mat[0][0]<<endl;
+        int n;
+        cin>>n;
+        cout<<"Case "<<test++<<": "<<(M.expo(n-1)*F).mat[0][0]<<endl;
     }
     return 0;
 }

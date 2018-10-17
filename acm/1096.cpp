@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 #define pb push_back
-
 using namespace std;
-///Did not Deal with doing mod; for that put mod in the multiply function;all replace all int with long long
+int md;
 struct Matrix
 {
     vector<vector<int> >mat;
@@ -40,7 +39,7 @@ struct Matrix
             {
                 for(int j=0; j<col; j++)
                 {
-                    res[i][k]+=mat[i][j]*a.mat[j][k];
+                    res[i][k]=(res[i][k]+mat[i][j]*a.mat[j][k])%md;
                 }
             }
         }
@@ -94,33 +93,56 @@ struct Matrix
 
 int main()
 {
-    /*
-    ///MULTIPLYING TWO MATRICES
-    int n,m,k;
-    cin>>n>>m>>k;
-    Matrix a(n,m),b(m,k);
-    a.WholeInput();
-    b.WholeInput();
-    Matrix res=a*b;
-    res.printMat();
-    ///END MULTIPLY
-    */
+    Matrix M(6,6);
 
-    ///FINDING THE N-TH FIBONACCCI
-    Matrix M(2,2);
-    M.takeIn(0,0,1);
-    M.takeIn(0,1,1);
     M.takeIn(1,0,1);
-    M.takeIn(1,1,0);
-    Matrix F(2,1);
-    F.takeIn(0,0,1);
-    F.takeIn(1,0,1);
-    int nth;
-    while(cin>>nth)
+    M.takeIn(2,1,1);
+    M.takeIn(5,4,1);
+    M.takeIn(4,3,1);
+
+    Matrix F(6,1);
+
+    int t,test=1;
+    cin>>t;
+    while(t--)
     {
-        Matrix r(M.expo(nth-1)*F);
-        cout<<r.mat[0][0]<<endl;
+        int n,a1,b1,c1,q;
+        int a2,b2,c2;
+        int g0,g1,g2;
+        int f0,f1,f2;
+        cin>>a1>>b1>>c1>>a2>>b2>>c2>>f0>>f1>>f2>>g0>>g1>>g2>>md>>q;
+
+        a1%=md;b1%=md;c1%=md;a2%=md;b2%=md;c2%=md;f0%=md;f1%=md;f2%=md;g0%=md;g1%=md;g2%=md;//was getting wa without this >.<
+
+        F.takeIn(0,0,f2);
+        F.takeIn(1,0,f1);
+        F.takeIn(2,0,f0);
+        F.takeIn(3,0,g2);
+        F.takeIn(4,0,g1);
+        F.takeIn(5,0,g0);
+
+        M.takeIn(0,0,a1);
+        M.takeIn(0,1,b1);
+        M.takeIn(0,5,c1);
+        M.takeIn(3,2,c2);
+        M.takeIn(3,3,a2);
+        M.takeIn(3,4,b2);
+
+        cout<<"Case "<<test++<<":\n";
+        while(q--){
+            cin>>n;
+            if(n<3){
+                if(n==0) cout<<f0<<" "<<g0<<endl;
+                else if(n==1) cout<<f1<<" "<<g1<<endl;
+                if(n==2) cout<<f2<<" "<<g2<<endl;
+            }
+            else{
+                Matrix r(M.expo(n-2)*F);
+                cout<<r.mat[0][0]<<" "<<r.mat[3][0]<<endl;
+            }
+        }
     }
     return 0;
 }
+
 

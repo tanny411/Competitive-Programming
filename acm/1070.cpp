@@ -1,11 +1,51 @@
+/*
+https://turing13.wordpress.com/2016/09/25/light-oj-1070-algebraic-problem/
+Solution Idea:
+
+Meaning of the questions:
+You p = a + b, q = ab
+
+Calculating (a ^ n + b ^) mod2 ^ 64
+
+practice:
+
+mod 2 ^ 64 so open unsigned long long, llu on the line, reaches the upper limit will be automatically modulo.
+
+Then the formula is. I was pushing the law found in the formula.
+
+a ^ 2 + b ^ 2 = (a + b) * (a + b) -2 * a * b
+
+a ^ 3 + b ^ 3 = (a ^ 2 + b ^ 2) * (a + b) -a * b (a + b)
+
+a ^ 4 + b ^ 4 = (a ^ 3 + b ^ 3) * (a + b) -a * b (a ^ 2 + b ^ 2)
+
+now --
+
+1.a^n + b^n = (a^(n-1)+b^(n-1))*(a+b) - a*b*(a^(n-2)+b^(n-2))
+
+2.  Xn = a^n + b^n
+
+3 . Xn = pXn-1 + qXn-2
+
+    (p q)      (Xn-1)         (pXn-1 + qXn-2)         (Xn  )
+4.         x               =                      =
+    (1 0)      (Xn-2)         ( Xn-1 +  0  )          (Xn-1)
+
+5 . from this
+
+    (p q)^(n-1)     (X1)     (Xn   )
+                x          =
+    (1 0)           (X0)     (Xn-1)
+
+*/
 #include<bits/stdc++.h>
 #define pb push_back
-
+#define ll unsigned long long
 using namespace std;
-///Did not Deal with doing mod; for that put mod in the multiply function;all replace all int with long long
+int mod;
 struct Matrix
 {
-    vector<vector<int> >mat;
+    vector<vector<ll> >mat;
     int row,col;
 
     Matrix() {}
@@ -23,9 +63,9 @@ struct Matrix
             mat[i].resize(col);
         }
     }
-    Matrix(vector<vector<int> >val): mat(val),row(val.size()),col(val[0].size()) {}
+    Matrix(vector<vector<ll> >val): mat(val),row(val.size()),col(val[0].size()) {}
 
-    void takeIn(int i,int j,int val)
+    void takeIn(int i,int j,ll val)
     {
         mat[i][j]=val;
     }
@@ -33,7 +73,7 @@ struct Matrix
     Matrix operator*(const Matrix &a) const
     {
         int m=a.col;
-        vector<vector<int> >res(row,vector<int>(m));
+        vector<vector<ll> >res(row,vector<ll>(m));
         for(int i=0; i<row; i++)
         {
             for(int k=0; k<m; k++)
@@ -54,7 +94,7 @@ struct Matrix
         {
             for(int j=0; j<n; j++)
             {
-                if(i==j) a.mat[i][j]=1;
+                if(i==j) a.mat[i][j]=1ll;
             }
         }
         return a;
@@ -105,22 +145,28 @@ int main()
     res.printMat();
     ///END MULTIPLY
     */
-
-    ///FINDING THE N-TH FIBONACCCI
     Matrix M(2,2);
-    M.takeIn(0,0,1);
-    M.takeIn(0,1,1);
     M.takeIn(1,0,1);
     M.takeIn(1,1,0);
     Matrix F(2,1);
-    F.takeIn(0,0,1);
-    F.takeIn(1,0,1);
-    int nth;
-    while(cin>>nth)
+    int t,test=1;
+    scanf("%d",&t);
+    while(t--)
     {
-        Matrix r(M.expo(nth-1)*F);
-        cout<<r.mat[0][0]<<endl;
+        ll p,q,n;
+        scanf("%llu%llu%llu",&p,&q,&n);
+        M.takeIn(0,0,p);
+        M.takeIn(0,1,-q);
+        F.takeIn(0,0,p);
+        F.takeIn(1,0,2);
+        if(n==0){
+            printf("Case %d: 2\n",test++);
+            continue;
+        }
+        Matrix r(M.expo(n-1)*F);
+        printf("Case %d: %llu\n",test++,r.mat[0][0]);
     }
     return 0;
 }
+
 

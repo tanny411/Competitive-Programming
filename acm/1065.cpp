@@ -2,7 +2,7 @@
 #define pb push_back
 
 using namespace std;
-///Did not Deal with doing mod; for that put mod in the multiply function;all replace all int with long long
+int mod;
 struct Matrix
 {
     vector<vector<int> >mat;
@@ -40,7 +40,7 @@ struct Matrix
             {
                 for(int j=0; j<col; j++)
                 {
-                    res[i][k]+=mat[i][j]*a.mat[j][k];
+                    res[i][k]=(res[i][k]+mat[i][j]*a.mat[j][k])%mod;
                 }
             }
         }
@@ -49,7 +49,7 @@ struct Matrix
 
     Matrix identity(int n)
     {
-        Matrix a(n,n);
+        Matrix a;
         for(int i=0; i<n; i++)
         {
             for(int j=0; j<n; j++)
@@ -113,13 +113,29 @@ int main()
     M.takeIn(1,0,1);
     M.takeIn(1,1,0);
     Matrix F(2,1);
-    F.takeIn(0,0,1);
-    F.takeIn(1,0,1);
-    int nth;
-    while(cin>>nth)
+//    F.takeIn(0,0,1);
+//    F.takeIn(1,0,1);
+//    int nth;
+//    while(cin>>nth)
+//    {
+//        Matrix r(M.expo(nth-1)*F);
+//        cout<<r.mat[0][0]<<endl;
+//    }
+    int t,test=1;
+    scanf("%d",&t);
+    while(t--)
     {
-        Matrix r(M.expo(nth-1)*F);
-        cout<<r.mat[0][0]<<endl;
+        int a,b,n,x;
+        scanf("%d%d%d%d",&a,&b,&n,&x);
+        mod=1;
+        while(x--)
+        {
+            mod*=10;
+        }
+        F.takeIn(0,0,b);
+        F.takeIn(1,0,a);
+        Matrix r(M.expo(n-1)*F);
+        printf("Case %d: %d\n",test++,r.mat[0][0]);
     }
     return 0;
 }
