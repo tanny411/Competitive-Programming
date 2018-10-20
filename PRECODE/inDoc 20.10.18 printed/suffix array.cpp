@@ -39,7 +39,7 @@ void makeSuffAra(string s){
     }
 
     int step=1;
-    for(int j=1;j<n;step++,j<<=1){///power(step-1)<n
+    for(int j=1;j<n;step++,j<<=1){///power(2,step-1)<n
         for(int i=0;i<n;i++){
             L[i].sc=i;
             L[i].fs.fs=P[i][step-1];

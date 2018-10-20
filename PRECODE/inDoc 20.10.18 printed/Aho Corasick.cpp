@@ -2,7 +2,7 @@
 #define pb push_back
 using namespace std;
 
-///Max number of states = sum of length of patterns
+///Max number of states = sum of length of patterns n*|p|
 #define MAXS 500
 ///Max characters
 #define MAXC 26

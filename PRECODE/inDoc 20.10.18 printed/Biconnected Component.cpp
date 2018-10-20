@@ -20,7 +20,6 @@
 using namespace std;
 
 #define maxnode 1000+7
-
 vector<int>gr[maxnode],disc(maxnode,-1),low(maxnode);
 stack<pii>s;
 int t=0;

@@ -10,11 +10,11 @@
 
 #define fs first
 #define sc second
+using namespace std;
 
 ///
 #define node 10003
 #define ln 14
-using namespace std;
 
 vector<pair<pii,int> >gr[node]; ///v,w,indexOfEdge
 int table[node][ln],level[node],siz[node],indexx[node];

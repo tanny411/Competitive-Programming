@@ -21,7 +21,8 @@ using namespace std;
 
 #define maxnode 10000+7
 vector<int>gr[maxnode];
-vector<int>arti(maxnode),low(maxnode),disc(maxnode,-1);///true if is an articulation point
+vector<int>arti(maxnode),low(maxnode),disc(maxnode,-1);
+///true if is an articulation point
 int t=0;
 
 void dfs(int p,int u)

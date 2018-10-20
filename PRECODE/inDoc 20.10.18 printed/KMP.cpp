@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-vector<int>lps;///longest prefix,suffix
+vector<int>lps;///longest 'proper' prefix,suffix
 ///The failure function: i,e where to go if characters fail to match.
 void computeLPS(string pat,int m)
 {

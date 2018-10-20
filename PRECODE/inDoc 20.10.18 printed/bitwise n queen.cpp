@@ -20,7 +20,6 @@
 using namespace std;
 
 int n;
-
 int solve(int row,int minDiag, int majDiag, int col){
     if(row==n) return 1;
     int res=0;

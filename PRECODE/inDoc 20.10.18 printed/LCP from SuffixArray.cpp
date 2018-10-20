@@ -32,6 +32,11 @@ void suffAra(string s,int n){
     for(int i=0;i<n;i++){
         P[i][0]=s[i]-'a';
     }
+    /**
+    Care must be taken when string length is 1, in that case if the string is "c", then it will get a rank of ('c'-'a')
+    that is 2 because we will not enter the for loop. In this case you can manually put the rank as 1, that is P[0][1]=1
+    instead of P[0][1]=str[1]-'a'.
+    */
     int step=1;
     for(int j=1;j<n;j<<=1,step++){
         for(int i=0;i<n;i++){
@@ -50,7 +55,8 @@ void suffAra(string s,int n){
         suff[P[i][step]]=i;
     }
 }
-int LCP(int a,int b,int n){///longest common prefix of a and b index suffix of the string from suffix array, i.e index of suffix array
+int LCP(int a,int b,int n){
+    ///longest common prefix of a and b index suffix of the string from suffix array, i.e index of suffix array
     ///n is the length of the original string
     a=suff[a];
     b=suff[b];

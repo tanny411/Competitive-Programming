@@ -47,9 +47,9 @@
 #define sc second
 
 ///ios_base::sync_with_stdio(false)
-#define maxnode 10000
-using namespace std;
 
+using namespace std;
+#define maxnode 10000
 int n;//given no. of nodes;
 vector<int>sec(maxnode+2),parent(maxnode+2,-1),lvl(maxnode+2,-1),dist(maxnode+2);
 vector<pii>gr[maxnode+2];

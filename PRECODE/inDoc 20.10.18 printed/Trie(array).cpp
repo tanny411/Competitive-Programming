@@ -4,7 +4,8 @@
 
 using namespace std;
 
-#define mx 1000 ///no. of nodes=number of strings*max string size
+#define mx 1000
+///no. of nodes=number of strings*max string size
 struct trietree
 {
     int tr[mx][26];

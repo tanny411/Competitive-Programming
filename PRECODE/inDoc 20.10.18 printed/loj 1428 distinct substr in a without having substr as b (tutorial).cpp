@@ -1,3 +1,35 @@
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <list>
+#include <stack>
+#include <utility>
+#include <set>
+#include <ctime>
+#include <string>
+#include <map>
+#include <vector>
+#include <queue>
+#include <cctype>
+
+#define LongInt long long
+#define max3(a, b, c) max(a, b) > max(b, c) ? max(a, b) : max(b, c)
+#define min3(a, b, c) min(a, b) < min(b, c) ? min(a, b) : min(b, c)
+
+#define BOUNDARY(i, j) (i < 0 || i > row-1 || j < 0 || j > column - 1)
+
+#define SIZE 50005
+#define digit(c) ((c) - '0')
+#define PI 3.141592654
+#define MAX_INT 2147483646
+#define DIFF 10E-7
+#define CONST 1000000007
+
+using namespace std;
 /*
 Algorithm: KMP, Suffix Array
 A nice tutorial on KMP: http://www.iti.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm
@@ -68,40 +100,6 @@ for(i = 0; i < len1; i++)
 	if(k > 0) sum += k;
 }
 */
-
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <cstdlib>
-#include <iostream>
-#include <cmath>
-#include <algorithm>
-#include <list>
-#include <stack>
-#include <utility>
-#include <set>
-#include <ctime>
-#include <string>
-#include <map>
-#include <vector>
-#include <queue>
-#include <cctype>
-
-#define LongInt long long
-#define max3(a, b, c) max(a, b) > max(b, c) ? max(a, b) : max(b, c)
-#define min3(a, b, c) min(a, b) < min(b, c) ? min(a, b) : min(b, c)
-
-#define BOUNDARY(i, j) (i < 0 || i > row-1 || j < 0 || j > column - 1)
-
-#define SIZE 50005
-#define digit(c) ((c) - '0')
-#define PI 3.141592654
-#define MAX_INT 2147483646
-#define DIFF 10E-7
-#define CONST 1000000007
-
-using namespace std;
-
 int row, column, step;
 int B[SIZE];
 char str[SIZE];

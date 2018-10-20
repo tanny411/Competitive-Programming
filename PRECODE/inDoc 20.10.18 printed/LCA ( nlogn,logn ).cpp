@@ -45,11 +45,10 @@
 
 #define fs first
 #define sc second
-
+using namespace std;
 ///ios_base::sync_with_stdio(false)
 #define maxnode 10000+2
 #define logmaxnode (int)log2(10000)+2
-using namespace std;
 int n,start;
 vector<int>gr[maxnode],lvl(maxnode,-1),parent(maxnode);
 
