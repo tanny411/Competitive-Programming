@@ -118,7 +118,7 @@ struct GEO
     }
     double perpDist(point d,point a,point b)
     {
-        ///perpendicular distance from the point d, to the line cointaing the points a and b
+        ///perpendicular distance from the point d, to the line containing the points a and b
         return area_of_parallelogram(a,d,b)/dist(a,b);
         ///because 1/2*base*height=1/2*area of parallelogram
         ///so, height=area/base;

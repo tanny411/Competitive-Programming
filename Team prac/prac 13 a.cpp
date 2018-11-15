@@ -21,9 +21,25 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     int t,test=1;
-    int cnt=0;
-    int x=++cnt + ++cnt;
-    cout<<x<<endl;
+    int a,b,c;
+    cin>>a>>b>>c;
+    int o=0,z=0;
+    if(a) o++; else z++;
+    if(b) o++; else z++;
+    if(c) o++; else z++;
+    if(o==1)
+    {
+        if(a) cout<<"A\n";
+        else if(b) cout<<"B\n";
+        else cout<<"C\n";
+    }
+    else if(z==1)
+    {
+        if(!a) cout<<"A\n";
+        else if(!b) cout<<"B\n";
+        else cout<<"C\n";
+    }
+    else cout<<"*\n";
     return 0;
 }
 

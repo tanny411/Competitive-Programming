@@ -9,7 +9,7 @@
 #define INTMAX 1<<30
 #define MOD 1000000007
 
-#define LL long long
+#define ll long long
 #define LLU unsigned long long
 
 #define fs first
@@ -21,9 +21,25 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     int t,test=1;
-    int cnt=0;
-    int x=++cnt + ++cnt;
-    cout<<x<<endl;
+    ll n;
+    cin>>n;
+    ll prime=n;
+    for(ll i=2;i*i<=n;i++)
+    {
+        if(n%i==0)
+        {
+            prime=i;
+            break;
+        }
+    }
+    if(prime==2)
+    {
+        cout<<n/2<<endl;
+    }
+    else{
+        n-=prime;
+        cout<<1+n/2<<endl;
+    }
     return 0;
 }
 

@@ -21,9 +21,21 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     int t,test=1;
+    int n,r;
+    cin>>n>>r;
+    int ara[n+2];
+    memset(ara,0,sizeof ara);
+    for(int i=0;i<r;i++)
+    {
+        int x;
+        cin>>x;
+        ara[x]=1;
+    }
     int cnt=0;
-    int x=++cnt + ++cnt;
-    cout<<x<<endl;
+    for(int i=1;i<=n;i++)
+    {
+        if(!ara[i]) cout<<i<<" ",cnt++;
+    }
+    if(cnt==0) cout<<"*";
     return 0;
 }
-
