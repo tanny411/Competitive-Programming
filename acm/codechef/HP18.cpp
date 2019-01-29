@@ -34,23 +34,30 @@ using namespace std;
 int main()
 {
     int t,cas=1;
-    cin>>t;getchar();
+    cin>>t;
     while(t--){
-        string s;
-        getline(cin,s);
-        stringstream ss;
-        ss<<s;
-        string x;
-        int ase=0;
-        while(ss>>x){
-            //cout<<x<<"   ";
-            if(x=="not") {
-                ase=1;
-                break;
-            }
+        int n,a,b,na=0,nb=0,both=0;
+        cin>>n>>a>>b;
+        for(int i=0;i<n;i++){
+            int x;
+            cin>>x;
+            int f=0;
+            if(x>=a && x%a==0) na++,f++;
+            if(x>=b && x%b==0) nb++,f++;
+            if(f==2) both++,na--,nb--;
         }
-        if(ase) cout<<"Real Fancy\n";
-        else cout<<"regularly fancy\n";
+        if(both==0){
+            // if(na==0 && nb==0) cout<<"ALICE\n";
+            // else if(na==nb) cout<<"ALICE\n";
+            // else if(na>nb) cout<<"BOB\n";
+            // else cout<<"ALICE\n";
+            if(na>nb) cout<<"BOB\n";
+            else cout<<"ALICE\n";
+        }
+        else{
+            if(na<nb) cout<<"ALICE\n";
+            else cout<<"BOB\n";
+        }
     }
     return 0;
 }

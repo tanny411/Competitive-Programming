@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define pb push_back
 #define Pb pop_back
+#define fs first
+#define sc second
 #define PI acos(-1.00)
 #define pii pair<int,int>
 #define ppi pair<pii,int>
 #define MOD 1000000007
-#define ll long long
-#define llu unsigned long long
 #define eps .0000001
 #define zero 0.0000000000000001
 #define floatless(a,b) ( (a-b)<=eps )
@@ -33,24 +33,25 @@ using namespace std;
 
 int main()
 {
-    int t,cas=1;
-    cin>>t;getchar();
+    int t;
+    cin>>t;
     while(t--){
+        int n;
+        cin>>n;
         string s;
-        getline(cin,s);
-        stringstream ss;
-        ss<<s;
-        string x;
-        int ase=0;
-        while(ss>>x){
-            //cout<<x<<"   ";
-            if(x=="not") {
-                ase=1;
-                break;
+        cin>>s;
+        if(n==2){
+            if(s[0]>=s[1]){
+                cout<<"NO\n";
+            }
+            else{
+                cout<<"YES\n2\n"<<s[0]<<" "<<s[1]<<endl;
             }
         }
-        if(ase) cout<<"Real Fancy\n";
-        else cout<<"regularly fancy\n";
+        else{
+            cout<<"YES\n2\n";
+            cout<<s[0]<<" "<<s.substr(1,n-1)<<endl;
+        }
     }
     return 0;
 }

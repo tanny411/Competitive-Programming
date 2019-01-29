@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define pb push_back
 #define Pb pop_back
+#define fs first
+#define sc second
 #define PI acos(-1.00)
 #define pii pair<int,int>
 #define ppi pair<pii,int>
 #define MOD 1000000007
-#define ll long long
-#define llu unsigned long long
 #define eps .0000001
 #define zero 0.0000000000000001
 #define floatless(a,b) ( (a-b)<=eps )
@@ -33,24 +33,34 @@ using namespace std;
 
 int main()
 {
-    int t,cas=1;
-    cin>>t;getchar();
-    while(t--){
-        string s;
-        getline(cin,s);
-        stringstream ss;
-        ss<<s;
-        string x;
-        int ase=0;
-        while(ss>>x){
-            //cout<<x<<"   ";
-            if(x=="not") {
-                ase=1;
-                break;
-            }
-        }
-        if(ase) cout<<"Real Fancy\n";
-        else cout<<"regularly fancy\n";
+    int n,k;
+    cin>>n>>k;
+    vector<int>a(n);
+    string s;
+    for(int i=0;i<n;i++){
+        cin>>a[i];
     }
+    cin>>s;
+    long long sum=0;
+    int prev=s[0];
+    vector<int>v;
+    for(int i=0;i<n;i++){
+       if(s[i]==prev) v.pb(a[i]);
+       else{
+           sort(v.rbegin(),v.rend());
+           for(int i=0;i<min(k,(int)v.size());i++){
+               sum+=(long long)v[i];
+           }
+           //cout<<"  "<<sum<<endl;
+           v.clear();
+           v.pb(a[i]);
+       }
+       prev=s[i];
+    }
+    sort(v.rbegin(),v.rend());
+    for(int i=0;i<min(k,(int)v.size());i++){
+        sum+=(long long)v[i];
+    }
+    cout<<sum<<endl;
     return 0;
 }
