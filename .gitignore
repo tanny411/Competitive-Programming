@@ -1,6 +1,7 @@
-
 *.save-failed
 *.exe
 *.o
 PRECODE/answer00.txt
 acm/out.txt
+a.out
+.vscode
